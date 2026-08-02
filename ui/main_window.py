@@ -1,5 +1,6 @@
 import tkinter as tk
 from models.product import Product
+from ui.order_summary import show_order_summary
 
 def build_main_window(root):
     products = [
@@ -11,7 +12,7 @@ def build_main_window(root):
     label = tk.Label(root, text="Welcome to the Order App", fg="white", bg="#2b2b2b")
     label.pack(pady=10)
 
-    selections = []  # houdt bij welke producten geselecteerd zijn
+    selections = []
 
     for product in products:
         var = tk.BooleanVar()
@@ -28,8 +29,7 @@ def build_main_window(root):
 
     def place_order():
         chosen = [product for product, var in selections if var.get()]
-        for product in chosen:
-            print(f"Ordered: {product}")
+        show_order_summary(root, chosen)
 
     button = tk.Button(root, text="Place Order", command=place_order)
     button.pack(pady=10)
